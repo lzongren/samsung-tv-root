@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <UseAppHost>false</UseAppHost>
+  </PropertyGroup>
+  <ItemGroup><Compile Include="../../payloads/qn90d-policy/WakePolicy.cs" Link="WakePolicy.cs" /></ItemGroup>
+</Project>

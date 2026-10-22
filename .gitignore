@@ -18,3 +18,16 @@
 *passphrase*.json
 __pycache__/
 *.pyc
+
+# Local TV research: device dumps, credentials, vendor libraries, failed prototypes.
+/evidence/
+/payloads/qn90d/
+/payloads/qn90d-wake-events/
+/payloads/qn90d-service/refs/
+/payloads/qn90d-service/start-service.sh
+/payloads/qn90d-service/tizen-manifest-dotnet.xml
+/payloads/qn90d-policy/out/
+/payloads/qn90d-service/out/
+/payloads/qn90d-register/out/
+
+/payloads/qn90d-policy/out-v2/

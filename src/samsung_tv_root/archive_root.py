@@ -84,7 +84,25 @@ def _check_target(client: SdbClient) -> TargetAssessment:
         raise ArchiveRootError(
             "sdbd-tarlauncher lacks effective SETUID/SETGID capabilities"
         )
-    runtimes = _capture(client, "/usr/bin/dotnet --list-runtimes")
+    try:
+        runtimes = _capture(client, "/usr/bin/dotnet --list-runtimes")
+    except ArchiveRootError as error:
+        if "Unknown option --list-runtimes" not in str(error):
+            raise
+        # Samsung's TV launcher may lack the standard host CLI. Require real
+        # runtime files, rather than inferring compatibility from empty folders.
+        versions = _capture(
+            client,
+            "for d in /usr/share/dotnet/shared/Microsoft.NETCore.App/*; do "
+            "if test -f \"$d/libcoreclr.so\" && "
+            "test -f \"$d/System.Private.CoreLib.dll\"; then "
+            "basename \"$d\"; fi; done",
+        )
+        runtimes = "\n".join(
+            f"Microsoft.NETCore.App {version} [Samsung TV]"
+            for version in versions.splitlines()
+            if re.fullmatch(r"\d+\.\d+\.\d+", version)
+        )
     majors = {
         int(match.group(1))
         for line in runtimes.splitlines()

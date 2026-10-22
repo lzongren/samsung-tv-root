@@ -490,3 +490,9 @@ Start with the [quick start](QUICKSTART.md). The
 implementation and reverse-engineering research notes.
 
 This project is released under the [Unlicense](LICENSE).
+
+## QN90D HDMI wake service (experimental)
+
+A TV-local service can select HDMI1 after ordinary remote wake while preserving
+HDMI-CEC routing. See [compatibility, build, installation and rollback notes](docs/qn90d-hdmi-wake.md).
+This is firmware-specific source tooling, not part of the prebuilt release payloads.

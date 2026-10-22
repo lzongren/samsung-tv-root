@@ -56,6 +56,9 @@ jobs:
             6.0.x
       - name: Install ARM linker
         run: sudo apt-get update && sudo apt-get install --yes clang lld
+      - run: dotnet run --project tests/hdmi-wake/HdmiWake.Tests.csproj --configuration Release
+      - run: dotnet build payloads/qn90d-policy/HdmiWakePolicy.csproj --configuration Release
+      - run: dotnet build payloads/qn90d-register/ManifestTool.csproj --configuration Release
       - run: make payloads swu-preloads
       - name: Verify payload types
         run: |
