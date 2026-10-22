@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://tizen.org/ns/packages" package="org.local.hdmiwake"
+          version="1.0.0" api-version="6.0" install-location="internal-only"
+          root_path="/opt/usr/apps/org.local.hdmiwake">
+  <profile name="tv" />
+  <description>Owner-installed HDMI wake policy: ordinary remote to HDMI1; preserve CEC sources.</description>
+  <service-application appid="org.local.hdmiwake.service"
+                       exec="/opt/usr/apps/org.local.hdmiwake/bin/HdmiWakeService.dll"
+                       type="dotnet" on-boot="true" auto-restart="false"
+                       multiple="false" taskmanage="false">
+    <label>Local HDMI Wake Policy</label>
+  </service-application>
+</manifest>

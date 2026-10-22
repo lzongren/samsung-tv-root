@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <UseAppHost>false</UseAppHost>
+    <Nullable>enable</Nullable>
+    <StartupObject>HdmiWake.Bootstrap</StartupObject>
+    <TizenFrameworkPath Condition="'$(TizenFrameworkPath)' == ''">$(MSBuildProjectDirectory)/refs</TizenFrameworkPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../qn90d-policy/*.cs" Link="Policy/%(Filename)%(Extension)" />
+    <Reference Include="Tizen"><HintPath>$(TizenFrameworkPath)/Tizen.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Tizen.Applications.Common"><HintPath>$(TizenFrameworkPath)/Tizen.Applications.Common.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Tizen.Applications.Service"><HintPath>$(TizenFrameworkPath)/Tizen.Applications.Service.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+  <Target Name="CheckTizenReferences" BeforeTargets="ResolveReferences">
+    <Error Condition="!Exists('$(TizenFrameworkPath)/Tizen.dll') Or !Exists('$(TizenFrameworkPath)/Tizen.Applications.Common.dll') Or !Exists('$(TizenFrameworkPath)/Tizen.Applications.Service.dll')"
+           Text="Provide the three Tizen reference assemblies via TizenFrameworkPath; see docs/qn90d-hdmi-wake.md." />
+  </Target>
+</Project>
